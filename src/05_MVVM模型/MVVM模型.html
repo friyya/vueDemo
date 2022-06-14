@@ -1,0 +1,36 @@
+<!--
+  05_MVVM模型
+    1. M: 模型（Model）：data中的数据
+    2. V: 视图（View）：模板代码
+    3. VM: 视图模型（ViewModel）：Vue实例
+  观察发现：
+    1. data中所有属性，都出现在vm身上。
+    2. vm身上所有属性 及 Vue原型上所有属性，都可以在Vue模板中直接使用。
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <h1>姓名：{{name}}</h1>
+    <h1>年龄：{{age}}</h1>
+    <p>vm上的所有东西都可以用：option---{{$options}}</p>
+    <p>vm上的所有东西都可以用：emit---{{$emit}}</p>
+    <p>vm上的所有东西都可以用：_c---{{_c}}</p>
+  </div>
+  <script>
+    Vue.config.productionTip = false;
+    const vm = new Vue({
+      el:'#root',
+      data:{
+          name:'么耶咩',
+          age:20
+      }
+    })
+  </script>
+</body>
+</html>

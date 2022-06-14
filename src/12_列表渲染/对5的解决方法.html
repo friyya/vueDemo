@@ -1,0 +1,52 @@
+<!--
+  普通的数据调用的push等方法是沿着原型对象找到的Array.prototype的push()
+  vue中的数组的push等方法是vue经过了包装之后的方法，这个push先调用了Array原型上的push，第二件事重新解析模板
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../../js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+  <ul>
+    <li v-for="(val,key) in hobby" :key="key">
+      {{val}}
+    </li>
+  </ul>
+  <ul>
+    <li v-for="(item,index) in persons" :key="item.id">
+        {{item.name}}{{item.age}}
+    </li>
+  </ul>
+  <button @click="add">添加</button>
+</div>
+<script>
+  Vue.config.productionTip = false;
+  const vm = new Vue({
+    el:'#root',
+    data(){
+      return{
+        hobby:['抽烟','喝酒','烫头'],
+        persons:[
+          {id:'001',name:'马冬梅',age:20,gender:'female'},
+          {id:'002',name:'周冬雨',age:21,gender:'female'},
+          {id:'003',name:'周杰伦',age:22,gender:'male'},
+          {id:'004',name:'邓伦',age:23,gender:'male'},
+        ],
+      }
+    },
+    methods:{
+        add(){
+          // this.hobby[0]='学习';  //改不了，vue对于数组元素没有setter和getter。
+          this.hobby.push('学习');  //Vue可以动态监测7个数组方法  push pop shift unshift slice sort reverse
+          this.$set(this.hobby,1,'打台球');  //除了上面的7中方法，也可以用vm.$set() 或者 Vue.set()
+          this.persons.splice(0,1,{id:'001',name:'马老师',age:50,gender:'male'});
+        }
+    }
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!--
+    Vue的事件修饰符：
+        1.prevent:阻止默认事件（常用）；
+        2.stop: 组织事件冒泡（常用）；
+        3.once: 事件只触发一次（常用）；
+        4.capture: 使用事件的捕获模式（默认是冒泡模式）；
+        5.self:只有event.target是当前操作的元素时才触发；
+        6.passive:事件的默认行为立即执行，无需等待事件回调执行完毕；
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+      .outer{
+        width: 300px;
+        height: 300px;
+        background-color: skyblue;
+      }
+    </style>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+    <a href="https://www.baidu.com" @click.prevent="goBD">去百度</a>
+    <div class="outer" @click="cl">
+      <button @click.stop="bubble">冒个泡</button>
+    </div>
+    <button @click.once="once">只点一次</button>
+</div>
+    <script>
+      Vue.config.productionTip = false;
+      const vm = new Vue({
+        el:'#root',
+        data(){
+          return{
+
+          }
+        },
+        methods:{
+          goBD(){
+            alert('不去不去');
+          },
+          bubble(){
+            alert('冒个泡');
+          },
+          cl(){
+            alert('我被点到了');
+          },
+          once(){
+            alert('点了一次')
+          },
+        }
+      })
+    </script>
+
+</body>
+</html>

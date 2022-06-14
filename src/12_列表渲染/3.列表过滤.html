@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../../js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+  <input type="text" v-model="keyword">
+  <ul>
+    <li v-for="item in filterPersons">{{item.name}}--{{item.age}}--{{item.gender}}</li>
+  </ul>
+</div>
+<script>
+  Vue.config.productionTip = false;
+  const vm = new Vue({
+    el:'#root',
+    data(){
+      return{
+        keyword:'',
+        persons:[
+          {id:'001',name:'马冬梅',age:20,gender:'female'},
+          {id:'002',name:'周冬雨',age:21,gender:'female'},
+          {id:'003',name:'周杰伦',age:22,gender:'male'},
+          {id:'004',name:'邓伦',age:23,gender:'male'},
+        ]
+      }
+    },
+    methods:{
+
+    },
+    // 使用computed实现（更方便）
+    computed:{
+      filterPersons(){
+        let keyWord = this.keyword;
+        return this.persons.filter((item)=>{
+          return item.name.indexOf(keyWord) != -1;
+        })
+      }
+    },
+
+    //使用watch实现
+    // watch:{
+    //   keyword:{
+    //     immediate:true,
+    //     handler(val){
+    //       this.filterPersons = this.persons.filter(function (item){
+    //         return item.name.indexOf(val) != -1;
+    //       })
+    //     }
+    //   }
+    // }
+  })
+</script>
+</body>
+</html>

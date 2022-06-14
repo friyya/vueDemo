@@ -1,0 +1,37 @@
+<!--
+    _data里面的getter是获取代码中data里面的数据
+    _data里面的setter调用的方法能重新解析模板，之后就是生成新的虚拟DOM，新旧虚拟DOM对比，更新页面
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+    let data = {
+        name:'么耶咩',
+        age:18
+    }
+
+    const _data = new Observer(data);  //obs.name = data.name
+
+    function Observer(obj){
+        const keys = Object.keys(obj);  //获取属性名 keys=['name','age']
+        keys.forEach((item)=>{   //item:name/age
+            Object.defineProperty(this,item,{
+                get(){
+                    return obj[item];
+                },
+                set(val){
+                    obj[item] = val;
+                }
+            })
+        })
+    }
+</script>
+</body>
+</html>

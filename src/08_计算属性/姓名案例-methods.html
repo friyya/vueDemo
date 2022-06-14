@@ -1,0 +1,35 @@
+<!--
+  只要data中的数据发生改变，vue一定会重新解析模板，就会知道模板里哪个位置用到了这个数据，然后把它更新
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../../js/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <h1>姓：<input type="text" v-model="firstName"/></h1>
+    <h1>名: <input type="text" v-model="lastName"/></h1>
+    <h1>你的名字是：{{fullName()}}</h1>
+  </div>
+  <script>
+    Vue.config.productionTip = false;
+    const vm = new Vue({
+      el:'#root',
+      data(){
+        return{
+          firstName:'么耶',
+          lastName:'咩'
+        }
+      },
+      methods:{
+        fullName(){
+          return this.firstName + '-' + this.lastName;
+        }
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!--
+  事件的基本使用：
+      1.使用v-on:xxx 或者@xxx 绑定事件
+      2.事件的回调需要配置在methods对象中，最终会在vm上
+      3.methods中配置的函数，不要使用箭头函数，否则this就不指向vm了
+      4.methods中配置的函数，都是被Vue所管理的函数，this的指向是vm或组件实例对象
+      5.@click="demo" 和 @click="demo($event)"效果一致，但后者可以传参
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script src="../../js/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <button @click="showInfo">点我</button>
+    <button @click="showInfo1(10,$event)">点我1</button>
+  </div>
+  <script>
+    Vue.config.productionTip = false;
+    const vm = new Vue({
+      el:'#root',
+      data(){
+        return{
+
+        }
+      },
+      methods:{
+        showInfo(ev){
+          // console.log(this);  //此处的this是vm
+          console.log(ev.target.innerText);
+        },
+        showInfo1(num,e){
+          console.log(num,e);
+        }
+      }
+    })
+  </script>
+</body>
+</html>

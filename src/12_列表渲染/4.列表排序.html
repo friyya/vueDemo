@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../../js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+  <input type="text" v-model="keyword">
+  <ul>
+    <li v-for="item in filterPersons" :key="item.id">{{item.name}}--{{item.age}}--{{item.gender}}</li>
+  </ul>
+  <button @click="sortType='0'">原顺序</button>
+  <button @click="sortType='1'">升序</button>
+  <button @click="sortType='2'">降序</button>
+</div>
+<script>
+  Vue.config.productionTip = false;
+  const vm = new Vue({
+    el:'#root',
+    data(){
+      return{
+        keyword:'',
+        persons:[
+          {id:'001',name:'马冬梅',age:20,gender:'female'},
+          {id:'002',name:'周冬雨',age:21,gender:'female'},
+          {id:'003',name:'周杰伦',age:22,gender:'male'},
+          {id:'004',name:'邓伦',age:23,gender:'male'},
+        ],
+        sortType:0  // 0原顺序 1升序 2降序
+      }
+    },
+    // 使用computed实现（更方便）
+    computed:{
+      filterPersons(){
+        let arr= this.persons.filter((item)=>{
+          return item.name.indexOf(this.keyword)!= -1;
+        })
+        if(this.sortType>0){
+          arr.sort((val1,val2)=>{
+              return this.sortType == 1 ? val1.age-val2.age :val2.age-val1.age;
+            })
+          }
+        return arr;
+      }
+    }
+  })
+</script>
+</body>
+</html>

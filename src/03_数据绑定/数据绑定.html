@@ -1,0 +1,31 @@
+<!--
+    Vue中有2种数据绑定的方式：
+        1.单向绑定(v-bind)：数据只能从data流向页面。
+        2.双向绑定(v-model)：数据不仅能从data流向页面，还能从页面流向data。
+            备注：
+            1.双向绑定一般应用在表单类元素上（如：input/select等）；
+            2.v-model:value = 'xxx' 可以简写为v-model = 'xxx'，因为v-model默认收集的就是value值
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+      单向数据绑定：<input type="text" v-bind:value="value">
+      双向数据绑定：<input type="text" v-model:value="value">
+  </div>
+  <script>
+      Vue.config.productionTip = false;
+      const x = new Vue({
+          el:'#root',
+          data:{
+              value:'么耶咩',
+          },
+      })
+  </script>
+</body>
+</html>

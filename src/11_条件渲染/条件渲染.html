@@ -1,0 +1,64 @@
+<!--
+  11_条件渲染：
+    1.v-if
+      写法：
+          （1）.v-if = '表达式'
+               v-else-if = '表达式'
+               v-else = '表达式'
+              适用于：切换频率较低的场景。
+              特点：不展示的DOM元素直接被移除
+              注意：v-if可以和v-else-if，v-else一起使用，但要求结构不能被打断
+
+     2.v-show
+        写法：v-show='表达式'
+        适用于：切换频率较高的场景
+        特点：不展示的DOM元素不会被移除，仅仅是使用样式隐藏掉
+     3.备注：
+        使用v-if时，元素可能无法获取到，使用v-show一定可以获取到
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../../js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+    <h1>当前的值为{{n}}</h1>
+    <button @click="n++">n+1</button>
+    <!--使用v-show-->
+    <p v-show="true">展示效果</p>
+    <p v-show="n===1">第一行</p>
+
+    <!--使用v-if，使用else当前面条件成立时，else将不再去解析，减少资源的浪费  if,else标签间不能中断-->
+    <p v-if="n===1">第1行</p>
+    <p v-else-if="n===2">第2行</p>
+    <p v-else>其他</p>
+
+    <!--v-if与template的配合 为了不打乱页面的结构，导致某些样式对应不起来，可以使用template，编译的时候自动消失-->
+    <template v-if="n===1">
+      <h2>你好</h2>
+      <h2>旅行者</h2>
+      <h2>上海</h2>
+    </template>
+
+
+</div>
+<script>
+  Vue.config.productionTip = false;
+  const vm = new Vue({
+    el:'#root',
+    data(){
+      return{
+        n:0
+      }
+    },
+    methods:{
+
+    }
+  })
+</script>
+</body>
+</html>

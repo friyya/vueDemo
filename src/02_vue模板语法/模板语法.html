@@ -1,0 +1,34 @@
+<!--
+    Vue模板语法有2大类：
+    1.插值语法：
+        功能：用于解析标签体内容。
+        写法：{{xxx}}，xxx是js表达式，且可以直接读取到data中的所有属性。
+    2.指令语法：
+        功能：用于解析标签（包括：属性，内容，事件...）
+        举例：v-bind:href = 'xxx' 或 简写为 :href = 'xxx'，xxx同样要写成js表达式，且可以直接读取到data中的所有属性。
+        备注：vue中有很多指令，且形式都是v-xxx
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+      <h1>Hello World - {{name}}</h1>
+      <a v-bind:href="url.toUpperCase()">去百度</a>
+    </div>
+    <script>
+      Vue.config.productionTip = false;
+      const x = new Vue({
+        el:'#root',
+        data:{
+          name:'jack',
+          url:'https://www.baidu.com/'
+        }
+      })
+    </script>
+</body>
+</html>

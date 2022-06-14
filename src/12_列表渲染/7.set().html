@@ -1,0 +1,49 @@
+<!--
+只能给data中的某个对象添加属性，不能直接给data添加属性
+    vm.$set(vm.student,'gender','女')
+    或
+    Vue.set(vm.student,'gender','女')
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+    <button @click="addGender">添加gender</button>
+    <h1>姓名：{{student.name}}</h1>
+    <h1>年龄：{{student.age}}</h1>
+    <h1 v-if="student.gender">性别：{{student.gender}}</h1>
+    <h1></h1>
+</div>
+<script>
+    Vue.config.productionTip = false;
+    const vm = new Vue({
+        el:'#root',
+        data(){
+            return{
+                student: {
+                    name: '么耶咩',
+                    age: 20
+                }
+            }
+        },
+        methods:{
+            addGender(){
+                this.$set(this.student,'gender','女')
+
+                //或
+                // Vue.set(this.student,'gender','女');
+
+                //或
+                // this.student.name='么耶咩';
+                // this.student.gender='女';  //如果只有这个，模板不会主动解析
+            }
+        }
+    })
+</script>
+</body>
+</html>

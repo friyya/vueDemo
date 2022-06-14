@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../../js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+  <h1>今天的天气真{{info}}</h1>
+  <button @click="isHot = !isHot">切换</button>
+</div>
+<script>
+  Vue.config.productionTip = false;
+  const vm = new Vue({
+    el:'#root',
+    data(){
+      return{
+        isHot:true,
+      }
+    },
+    computed:{
+      info(){
+        return this.isHot ? '炎热': '凉爽';
+      }
+    },
+    watch:{
+      //完整写法
+      // isHot:{
+      //   // immediate:true,  //初始化时让handler调用一下
+      //   // deep:true, //深度监视
+      //   handler(newVal,oldVal){
+      //      console.log('123')
+      //   }
+      // },
+
+      //简写
+      // isHot(newVal,oldVal){
+      //   console.log('123')
+      // }
+    }
+  })
+  //完整写法
+  // vm.$watch('isHot',{
+  //     immediate:true,  //初始化时让handler调用一下
+  //     deep:true, //深度监视
+  //     handler(newVal,oldVal){
+  //        console.log('123')
+  //     }
+  // })
+
+  //简写
+  // vm.$watch('isHot',function (newVal,oldVal){console.log('123')})
+</script>
+</body>
+</html>
